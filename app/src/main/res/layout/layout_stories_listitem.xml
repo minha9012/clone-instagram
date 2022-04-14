@@ -5,7 +5,7 @@
     android:layout_height="95dp"
     android:layout_margin="1dp">
 
-    <!--<android.support.v7.widget.CardView-->
+    <!--<androidx.recyclerview.widget.CardView-->
         <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
         <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
         <!--android:layout_width="120dp"-->
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             >
 
-            <tabian.com.instagramclone2.Utils.TouchableRelativeLayout
+            <minggu.com.instagramclone.Utils.TouchableRelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
@@ -38,7 +38,7 @@
                         android:id="@+id/image"
                         android:src="@mipmap/ic_launcher"/>
 
-            </tabian.com.instagramclone2.Utils.TouchableRelativeLayout>
+            </minggu.com.instagramclone.Utils.TouchableRelativeLayout>
 
             <ProgressBar
                 android:layout_width="70dp"
@@ -81,7 +81,7 @@
         </RelativeLayout>
 
 
-    <!--</android.support.v7.widget.CardView>-->
+    <!--</androidx.recyclerview.widget.CardView>-->
 
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="tabian.com.instagramclone2">
+          package="minggu.com.instagramclone">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CAMERA"/>
@@ -21,20 +21,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Home.HomeActivity"
+            android:name="minggu.com.instagramclone.Home.HomeActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleInstance">
 
         </activity>
-        <activity android:name=".Likes.LikesActivity"
+        <activity android:name="minggu.com.instagramclone.Likes.LikesActivity"
                   android:launchMode="singleInstance"/>
-        <activity android:name=".Profile.ProfileActivity"
+        <activity android:name="minggu.com.instagramclone.Profile.ProfileActivity"
                   android:launchMode="singleInstance"/>
-        <activity android:name=".Share.ShareActivity"
+        <activity android:name="minggu.com.instagramclone.Share.ShareActivity"
                   android:launchMode="singleInstance"/>
-        <activity android:name=".Share.NextActivity"
+        <activity android:name="minggu.com.instagramclone.Share.NextActivity"
                   android:launchMode="singleInstance"/>
-        <activity android:name=".Login.LoginActivity"
+        <activity android:name="minggu.com.instagramclone.Login.LoginActivity"
                   android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -42,24 +42,24 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Profile.AccountSettingsActivity"
+        <activity android:name="minggu.com.instagramclone.Profile.AccountSettingsActivity"
                   android:launchMode="singleInstance"/>
-        <activity android:name=".Login.RegisterActivity"
+        <activity android:name="minggu.com.instagramclone.Login.RegisterActivity"
                   android:launchMode="singleInstance"/>
-        <activity android:name=".opengl.OpenGLES10Activity"
+        <activity android:name="minggu.com.instagramclone.opengl.OpenGLES10Activity"
                   android:launchMode="singleInstance"
                   android:screenOrientation="portrait"/>
-        <activity android:name=".opengl.NewStoryActivity"
+        <activity android:name="minggu.com.instagramclone.opengl.NewStoryActivity"
                   android:launchMode="singleInstance"
                   android:screenOrientation="portrait"/>
         <activity
-            android:name=".Search.SearchActivity"
+            android:name="minggu.com.instagramclone.Search.SearchActivity"
             android:windowSoftInputMode="adjustNothing"
             android:launchMode="singleInstance">
 
         </activity>
-        <activity android:name=".materialcamera.CaptureActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".materialcamera.CaptureActivity2" android:screenOrientation="portrait"/>
+        <activity android:name="minggu.com.instagramclone.materialcamera.CaptureActivity" android:screenOrientation="portrait"/>
+        <activity android:name="minggu.com.instagramclone.materialcamera.CaptureActivity2" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

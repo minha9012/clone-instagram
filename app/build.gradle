@@ -1,15 +1,22 @@
-apply plugin: 'com.android.application'
+
+plugins {
+    id 'com.android.application'
+//    id 'com.google.gms.google-services' //구글서비스 추가
+}
 
 android {
-    compileSdkVersion 27
+    compileSdk 32
+
     defaultConfig {
-        applicationId "tabian.com.instagramclone2"
-        minSdkVersion 18
-        targetSdkVersion 27
+        applicationId "minggu.com.instagramclone"
+        minSdk 18
+        targetSdk 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -19,49 +26,51 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.4.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:27.0.2'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    //noinspection GradleCompatible
+//    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+//    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    testImplementation 'junit:junit:4.13.2'
     //Design library for Coordinator Layout and Toolbars
-    compile 'com.android.support:design:27.0.2'
+    implementation 'com.google.android.material:material:1.5.0'
     //ExifInterface support
-    compile 'com.android.support:exifinterface:27.0.2'
+    implementation 'androidx.exifinterface:exifinterface:1.3.3'
     //design library for Coordinator Layout
-    compile 'com.android.support:design:27.0.2'
+    implementation 'com.google.android.material:material:1.5.0'
     //Exo Player
-    compile 'com.google.android.exoplayer:exoplayer:2.6.0'
+    implementation 'com.google.android.exoplayer:exoplayer:2.17.1'
     //cardview
-    compile 'com.android.support:cardview-v7:27.0.2'
+    implementation 'androidx.cardview:cardview:1.0.0'
     //recyclerview
-    compile 'com.android.support:recyclerview-v7:27.0.2'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     //BottomNavigationViewEx library
-    compile 'com.github.ittianyu:BottomNavigationViewEx:1.1.9'
+    implementation 'com.github.ittianyu:BottomNavigationViewEx:1.1.9'
     //Circle ImageView
-    compile 'de.hdodenhof:circleimageview:2.1.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
     //elastic header
-    compile 'com.github.eschao:android-ElasticListView:v1.0'
+    implementation 'com.github.eschao:android-ElasticListView:v1.0'
     //material dialogs
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     //glide
-    implementation 'com.github.bumptech.glide:glide:4.4.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
+    implementation 'com.github.bumptech.glide:glide:4.13.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.1'
     implementation files('libs/aspectjrt-1.7.3 (1).jar')
     //Universal image loader
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
+    implementation platform('com.google.firebase:firebase-bom:29.2.0')
+
     //firebase authentication
-    compile 'com.google.firebase:firebase-auth:10.2.6'
+    implementation 'com.google.firebase:firebase-auth'
     //firebase database
-    compile 'com.google.firebase:firebase-database:10.2.6'
+    implementation 'com.google.firebase:firebase-database'
     //firebase storage
-    compile 'com.google.firebase:firebase-storage:10.2.6'
-    compile files('libs/aspectjrt-1.7.3 (1).jar')
+    implementation 'com.google.firebase:firebase-storage'
 }
-
-//Firebase
-apply plugin: 'com.google.gms.google-services'
-
 

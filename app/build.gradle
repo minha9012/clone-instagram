@@ -1,7 +1,7 @@
 
 plugins {
     id 'com.android.application'
-//    id 'com.google.gms.google-services' //구글서비스 추가
+    id 'com.google.gms.google-services' //구글서비스 추가
 }
 
 android {
@@ -64,7 +64,7 @@ dependencies {
     //Universal image loader
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 
-    implementation platform('com.google.firebase:firebase-bom:29.2.0')
+    implementation platform('com.google.firebase:firebase-bom:29.3.0')
 
     //firebase authentication
     implementation 'com.google.firebase:firebase-auth'

@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId "minggu.com.instagramclone"
         minSdk 18
-        targetSdk 27
+        targetSdk 32
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.test.runner.AndroidJUnitRunner"
@@ -72,5 +72,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-database'
     //firebase storage
     implementation 'com.google.firebase:firebase-storage'
+
+    //add by minggu
+
 }
 

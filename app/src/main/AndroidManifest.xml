@@ -35,7 +35,8 @@
         <activity android:name="minggu.com.instagramclone.Share.NextActivity"
                   android:launchMode="singleInstance"/>
         <activity android:name="minggu.com.instagramclone.Login.LoginActivity"
-                  android:launchMode="singleInstance">
+                  android:launchMode="singleInstance"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

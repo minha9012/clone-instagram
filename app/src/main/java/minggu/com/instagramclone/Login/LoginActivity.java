@@ -3,9 +3,6 @@ package minggu.com.instagramclone.Login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,10 +11,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -76,79 +72,70 @@ public class LoginActivity extends AppCompatActivity {
 
          //initialize the button for logging in
          Button btnLogin = (Button) findViewById(R.id.btn_login);
-         btnLogin.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 Log.d(TAG, "onClick: attempting to log in.");
+         btnLogin.setOnClickListener(v -> {
+             Log.d(TAG, "onClick: attempting to log in.");
 
-                 String email = mEmail.getText().toString();
-                 String password = mPassword.getText().toString();
+             String email = mEmail.getText().toString();
+             String password = mPassword.getText().toString();
 
-                 if(isStringNull(email) && isStringNull(password)){
-                     Toast.makeText(mContext, "You must fill out all the fields", Toast.LENGTH_SHORT).show();
-                 }else{
-                     mProgressBar.setVisibility(View.VISIBLE);
-                     mPleaseWait.setVisibility(View.VISIBLE);
+             if(isStringNull(email) && isStringNull(password)){
+                 Toast.makeText(mContext, "You must fill out all the fields", Toast.LENGTH_SHORT).show();
+             }else{
+                 mProgressBar.setVisibility(View.VISIBLE);
+                 mPleaseWait.setVisibility(View.VISIBLE);
 
-                     mAuth.signInWithEmailAndPassword(email, password)
-                             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                 @Override
-                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                     Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-                                     FirebaseUser user = mAuth.getCurrentUser();
+                 mAuth.signInWithEmailAndPassword(email, password)
+                         .addOnCompleteListener(LoginActivity.this, task -> {
+                             Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+                             FirebaseUser user = mAuth.getCurrentUser();
 
-                                     // If sign in fails, display a message to the user. If sign in succeeds
-                                     // the auth state listener will be notified and logic to handle the
-                                     // signed in user can be handled in the listener.
-                                     if (!task.isSuccessful()) {
-                                         Log.w(TAG, "signInWithEmail:failed", task.getException());
+                             // If sign in fails, display a message to the user. If sign in succeeds
+                             // the auth state listener will be notified and logic to handle the
+                             // signed in user can be handled in the listener.
+                             if (!task.isSuccessful()) {
+                                 Log.w(TAG, "signInWithEmail:failed", task.getException());
 
-                                         Toast.makeText(LoginActivity.this, getString(R.string.auth_failed),
-                                                 Toast.LENGTH_SHORT).show();
-                                         mProgressBar.setVisibility(View.GONE);
-                                         mPleaseWait.setVisibility(View.GONE);
-                                     }
-                                     else{
-                                         try{
-                                             if(CHECK_IF_VERIFIED){
-                                                 if(user.isEmailVerified()){
-                                                     Log.d(TAG, "onComplete: success. email is verified.");
-                                                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                                     startActivity(intent);
-                                                 }else{
-                                                     Toast.makeText(mContext, "Email is not verified \n check your email inbox.", Toast.LENGTH_SHORT).show();
-                                                     mProgressBar.setVisibility(View.GONE);
-                                                     mPleaseWait.setVisibility(View.GONE);
-                                                     mAuth.signOut();
-                                                 }
-                                             }
-                                             else{
-                                                 Log.d(TAG, "onComplete: success. email is verified.");
-                                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                                 startActivity(intent);
-                                             }
-
-                                         }catch (NullPointerException e){
-                                             Log.e(TAG, "onComplete: NullPointerException: " + e.getMessage() );
+                                 Toast.makeText(LoginActivity.this, getString(R.string.auth_failed),
+                                         Toast.LENGTH_SHORT).show();
+                                 mProgressBar.setVisibility(View.GONE);
+                                 mPleaseWait.setVisibility(View.GONE);
+                             }
+                             else{
+                                 try{
+                                     if(CHECK_IF_VERIFIED){
+                                         if(user.isEmailVerified()){
+                                             Log.d(TAG, "onComplete: success. email is verified.");
+                                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                             startActivity(intent);
+                                         }else{
+                                             Toast.makeText(mContext, "Email is not verified \n check your email inbox.", Toast.LENGTH_SHORT).show();
+                                             mProgressBar.setVisibility(View.GONE);
+                                             mPleaseWait.setVisibility(View.GONE);
+                                             mAuth.signOut();
                                          }
                                      }
+                                     else{
+                                         Log.d(TAG, "onComplete: success. email is verified.");
+                                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                         startActivity(intent);
+                                     }
 
-                                     // ...
+                                 }catch (NullPointerException e){
+                                     Log.e(TAG, "onComplete: NullPointerException: " + e.getMessage() );
                                  }
-                             });
-                 }
+                             }
 
+                             // ...
+                         });
              }
+
          });
 
          TextView linkSignUp = (TextView) findViewById(R.id.link_signup);
-         linkSignUp.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 Log.d(TAG, "onClick: navigating to register screen");
-                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                 startActivity(intent);
-             }
+         linkSignUp.setOnClickListener(v -> {
+             Log.d(TAG, "onClick: navigating to register screen");
+             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+             startActivity(intent);
          });
 
          /*

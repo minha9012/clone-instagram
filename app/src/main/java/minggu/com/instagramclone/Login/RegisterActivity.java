@@ -45,7 +45,6 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseMethods firebaseMethods;
-    private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
 
     private String append = "";
@@ -65,19 +64,19 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void init(){
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                email = mEmail.getText().toString();
-                username = mUsername.getText().toString();
-                password = mPassword.getText().toString();
+        btnRegister.setOnClickListener(v -> {
+            email = mEmail.getText().toString();
+            username = mUsername.getText().toString();
+            password = mPassword.getText().toString();
 
-                if(checkInputs(email, username, password)){
-                    mProgressBar.setVisibility(View.VISIBLE);
-                    loadingPleaseWait.setVisibility(View.VISIBLE);
+            if(checkInputs(email, username, password)){
+                mProgressBar.setVisibility(View.VISIBLE);
+                loadingPleaseWait.setVisibility(View.VISIBLE);
 
-                    firebaseMethods.registerNewEmail(email, password, username);
-                }
+                firebaseMethods.registerNewEmail(email, password, username);
+
+                mProgressBar.setVisibility(View.GONE);
+                loadingPleaseWait.setVisibility(View.GONE);
             }
         });
     }
@@ -86,6 +85,9 @@ public class RegisterActivity extends AppCompatActivity {
         Log.d(TAG, "checkInputs: checking inputs for null values.");
         if(email.equals("") || username.equals("") || password.equals("")){
             Toast.makeText(mContext, "All fields must be filled out.", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if(password.length() < 8){
+            Toast.makeText(mContext, "You must enter at least 8 characters", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
@@ -110,12 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean isStringNull(String string){
         Log.d(TAG, "isStringNull: checking string if null.");
 
-        if(string.equals("")){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return string.equals("");
     }
 
      /*
@@ -171,38 +168,35 @@ public class RegisterActivity extends AppCompatActivity {
         Log.d(TAG, "setupFirebaseAuth: setting up firebase auth.");
 
         mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+        mAuthListener = firebaseAuth -> {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
 
-                if (user != null) {
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+            if (user != null) {
+                // User is signed in
+                Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
 
-                    myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                           checkIfUsernameExists(username);
-                        }
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                       checkIfUsernameExists(username);
+                    }
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                        }
-                    });
+                    }
+                });
 
-                    finish();
+                finish();
 
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
-                // ...
+            } else {
+                // User is signed out
+                Log.d(TAG, "onAuthStateChanged:signed_out");
             }
+            // ...
         };
     }
 

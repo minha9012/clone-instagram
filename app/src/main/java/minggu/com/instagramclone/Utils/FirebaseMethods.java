@@ -103,21 +103,18 @@ public class FirebaseMethods {
             UploadTask uploadTask = null;
             uploadTask = storageReference.putBytes(bytes);
 
-            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            uploadTask.addOnSuccessListener(taskSnapshot -> {
 //                    Uri firebaseUrl = taskSnapshot.getDownloadUrl();
-                    Task<Uri> firebaseUrl = Objects.requireNonNull(Objects.requireNonNull(taskSnapshot.getMetadata()).getReference()).getDownloadUrl();
+                Task<Uri> firebaseUrl = Objects.requireNonNull(Objects.requireNonNull(taskSnapshot.getMetadata()).getReference()).getDownloadUrl();
 
-                    Toast.makeText(mContext, "photo upload success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "photo upload success", Toast.LENGTH_SHORT).show();
 
-                    //add the new photo to 'photos' node and 'user_photos' node
-                    addPhotoToDatabase(caption, firebaseUrl.toString());
+                //add the new photo to 'photos' node and 'user_photos' node
+                addPhotoToDatabase(caption, firebaseUrl.toString());
 
-                    //navigate to the main feed so the user can see their photo
-                    Intent intent = new Intent(mContext, HomeActivity.class);
-                    mContext.startActivity(intent);
-                }
+                //navigate to the main feed so the user can see their photo
+                Intent intent = new Intent(mContext, HomeActivity.class);
+                mContext.startActivity(intent);
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
